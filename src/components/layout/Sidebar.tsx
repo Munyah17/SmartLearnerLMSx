@@ -84,7 +84,7 @@ export default function Sidebar() {
       {/* Footer */}
       {sidebarOpen && (
         <div className="px-4 py-3 border-t border-slate-700 shrink-0">
-          <p className="text-xs text-slate-500">v0.1.0 — Phase 1</p>
+          <p className="text-xs text-slate-500">v0.2.0 — Phase 2</p>
         </div>
       )}
     </aside>
