@@ -81,7 +81,7 @@ export default function LoginPage() {
           <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">
             Try a demo account
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {DEMO_ACCOUNTS.map((account, i) => (
               <button
                 key={i}
@@ -98,7 +98,7 @@ export default function LoginPage() {
                   {account.initials}
                 </div>
                 <div className="min-w-0">
-                  <p className="text-xs font-semibold text-slate-700 truncate">
+                  <p className="text-xs font-semibold text-slate-700 leading-tight">
                     {account.label ?? ROLE_LABELS[account.role]}
                   </p>
                   <p className="text-[10px] text-slate-400">click to fill</p>
