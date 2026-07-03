@@ -185,10 +185,10 @@ INSERT INTO public.profiles (
    'receptionist', null, 'female',
    'Administration', 'SLS-2026-ADM-00001', now(), true),
 
-  -- 7. Student — Head Boy
+  -- 7. Student
   ('00000000-0000-0000-0000-000000000008', '00000000-0000-0000-0000-000000000001',
    'Tinashe', 'Zvobgo', 'student',
-   null, 'head_boy', 'male',
+   null, 'student', 'male',
    null, 'SLS-2026-STD-00001', now(), true),
 
   -- 8. Parent

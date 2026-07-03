@@ -29,7 +29,7 @@ const DEMO_ACCOUNTS: DemoAccount[] = [
   { role: 'teacher',      label: 'Form Teacher',    email: 'teacher@demo.smartlearnlms.co.zw',       password: 'demo1234', color: 'bg-purple-100 text-purple-700 ring-purple-200', initials: 'TC' },
   { role: 'finance',      label: 'Bursar',          email: 'bursar@demo.smartlearnlms.co.zw',        password: 'demo1234', color: 'bg-amber-100 text-amber-700 ring-amber-200',   initials: 'BS' },
   { role: 'admin_staff',  label: 'Receptionist',    email: 'receptionist@demo.smartlearnlms.co.zw',  password: 'demo1234', color: 'bg-teal-100 text-teal-700 ring-teal-200',      initials: 'RC' },
-  { role: 'student',      label: 'Head Boy',        email: 'student@demo.smartlearnlms.co.zw',       password: 'demo1234', color: 'bg-emerald-100 text-emerald-700 ring-emerald-200', initials: 'HB' },
+  { role: 'student',      label: 'Student',         email: 'student@demo.smartlearnlms.co.zw',       password: 'demo1234', color: 'bg-emerald-100 text-emerald-700 ring-emerald-200', initials: 'ST' },
   { role: 'parent',       label: 'Parent',          email: 'parent@demo.smartlearnlms.co.zw',        password: 'demo1234', color: 'bg-pink-100 text-pink-700 ring-pink-200',      initials: 'PA' },
 ]
 

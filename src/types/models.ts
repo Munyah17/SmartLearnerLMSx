@@ -209,3 +209,85 @@ export interface IdSequence {
   role_prefix: string   // e.g. "STD", "TCH"
   last_seq: number
 }
+
+// ─────────────────────────────────────────────────────────────
+// Timetable slot
+// ─────────────────────────────────────────────────────────────
+export interface TimetableSlot {
+  id: string
+  school_id: string
+  class_id: string
+  subject_id: string
+  teacher_id: string | null
+  day_of_week: number     // 1 (Mon) – 7 (Sun)
+  period_number: number
+  start_time: string | null
+  end_time: string | null
+  room: string | null
+  created_by: string | null
+  created_at: string
+  updated_at: string
+  class?: Class
+  subject?: Subject
+  teacher?: Profile
+}
+
+// ─────────────────────────────────────────────────────────────
+// Grade / Result
+// ─────────────────────────────────────────────────────────────
+export type AssessmentType =
+  | 'classwork' | 'test' | 'exam' | 'coursework' | 'project' | 'assignment'
+
+export interface Grade {
+  id: string
+  school_id: string
+  student_id: string
+  class_id: string
+  subject_id: string
+  term: string
+  academic_year: string
+  assessment_type: AssessmentType
+  assessment_name: string
+  score: number
+  max_score: number
+  grade_letter: string | null
+  comment: string | null
+  recorded_by: string | null
+  created_at: string
+  updated_at: string
+  student?: Student
+  subject?: Subject
+}
+
+// ─────────────────────────────────────────────────────────────
+// Assignment
+// ─────────────────────────────────────────────────────────────
+export interface Assignment {
+  id: string
+  school_id: string
+  class_id: string
+  subject_id: string
+  title: string
+  description: string | null
+  due_date: string | null
+  max_score: number
+  created_by: string | null
+  created_at: string
+  updated_at: string
+  class?: Class
+  subject?: Subject
+}
+
+export interface AssignmentSubmission {
+  id: string
+  assignment_id: string
+  student_id: string
+  submitted_at: string | null
+  content: string | null
+  score: number | null
+  feedback: string | null
+  graded_by: string | null
+  created_at: string
+  updated_at: string
+  student?: Student
+}

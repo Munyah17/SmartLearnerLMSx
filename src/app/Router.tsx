@@ -8,11 +8,18 @@ import type { Permission } from '@/types/permissions'
 // ─────────────────────────────────────────────────────────────
 // Lazy-loaded pages
 // ─────────────────────────────────────────────────────────────
-const DashboardPage  = lazy(() => import('@/pages/DashboardPage'))
-const LoginPage      = lazy(() => import('@/features/auth/pages/LoginPage'))
-const StudentsPage   = lazy(() => import('@/features/students/pages/StudentsPage'))
-const ClassesPage    = lazy(() => import('@/features/classes/pages/ClassesPage'))
-const IDsPage        = lazy(() => import('@/features/ids/pages/IDsPage'))
+const DashboardPage      = lazy(() => import('@/pages/DashboardPage'))
+const LoginPage          = lazy(() => import('@/features/auth/pages/LoginPage'))
+const StudentsPage       = lazy(() => import('@/features/students/pages/StudentsPage'))
+const ClassesPage        = lazy(() => import('@/features/classes/pages/ClassesPage'))
+const IDsPage            = lazy(() => import('@/features/ids/pages/IDsPage'))
+const StaffPage          = lazy(() => import('@/features/staff/pages/StaffPage'))
+const StaffProfilePage   = lazy(() => import('@/features/staff/pages/StaffProfilePage'))
+const SubjectsPage       = lazy(() => import('@/features/subjects/pages/SubjectsPage'))
+const TimetablePage      = lazy(() => import('@/features/timetable/pages/TimetablePage'))
+const AttendancePage     = lazy(() => import('@/features/attendance/pages/AttendancePage'))
+const GradesPage         = lazy(() => import('@/features/grades/pages/GradesPage'))
+const AssignmentsPage    = lazy(() => import('@/features/assignments/pages/AssignmentsPage'))
 
 // ─────────────────────────────────────────────────────────────
 // Loaders
@@ -135,8 +142,22 @@ export default function Router() {
 
           {/* ── Staff ── */}
           <Route element={<PermissionRoute permission="staff.view" />}>
-            <Route path="/staff" element={<ComingSoon name="Staff Management" icon="👩‍🏫" />} />
-            <Route path="/staff/:id" element={<ComingSoon name="Staff Profile" icon="👤" />} />
+            <Route
+              path="/staff"
+              element={
+                <Suspense fallback={<PageLoader />}>
+                  <StaffPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/staff/:id"
+              element={
+                <Suspense fallback={<PageLoader />}>
+                  <StaffProfilePage />
+                </Suspense>
+              }
+            />
           </Route>
 
           {/* ── Classes ── */}
@@ -153,27 +174,62 @@ export default function Router() {
 
           {/* ── Subjects ── */}
           <Route element={<PermissionRoute permission="subjects.view" />}>
-            <Route path="/subjects" element={<ComingSoon name="Subjects" icon="📚" />} />
+            <Route
+              path="/subjects"
+              element={
+                <Suspense fallback={<PageLoader />}>
+                  <SubjectsPage />
+                </Suspense>
+              }
+            />
           </Route>
 
           {/* ── Timetable ── */}
           <Route element={<PermissionRoute permission="timetable.view" />}>
-            <Route path="/timetable" element={<ComingSoon name="Timetable" icon="🗓️" />} />
+            <Route
+              path="/timetable"
+              element={
+                <Suspense fallback={<PageLoader />}>
+                  <TimetablePage />
+                </Suspense>
+              }
+            />
           </Route>
 
           {/* ── Attendance ── */}
           <Route element={<PermissionRoute permission="attendance.manage" />}>
-            <Route path="/attendance" element={<ComingSoon name="Attendance" icon="✅" />} />
+            <Route
+              path="/attendance"
+              element={
+                <Suspense fallback={<PageLoader />}>
+                  <AttendancePage />
+                </Suspense>
+              }
+            />
           </Route>
 
           {/* ── Grades ── */}
           <Route element={<PermissionRoute permission="grades.manage" />}>
-            <Route path="/grades" element={<ComingSoon name="Grades & Results" icon="📊" />} />
+            <Route
+              path="/grades"
+              element={
+                <Suspense fallback={<PageLoader />}>
+                  <GradesPage />
+                </Suspense>
+              }
+            />
           </Route>
 
           {/* ── Assignments ── */}
           <Route element={<PermissionRoute permission="assignments.manage" />}>
-            <Route path="/assignments" element={<ComingSoon name="Assignments" icon="📝" />} />
+            <Route
+              path="/assignments"
+              element={
+                <Suspense fallback={<PageLoader />}>
+                  <AssignmentsPage />
+                </Suspense>
+              }
+            />
           </Route>
 
           {/* ── Fees ── */}
