@@ -30,11 +30,12 @@ async function loadUserData(
 }
 
 export function useAuthInit() {
-  const { setAuth, clearAuth } = useAuthStore()
+  const { setAuth, clearAuth, setLoading } = useAuthStore()
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
+        setLoading(true)
         loadUserData(session.user, session, setAuth, clearAuth)
       } else {
         clearAuth()
@@ -44,6 +45,7 @@ export function useAuthInit() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         if (session) {
+          setLoading(true)
           loadUserData(session.user, session, setAuth, clearAuth)
         } else {
           clearAuth()

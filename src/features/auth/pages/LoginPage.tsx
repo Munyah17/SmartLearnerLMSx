@@ -15,6 +15,7 @@ interface LoginForm {
 
 interface DemoAccount {
   role: UserRole
+  label?: string   // override for display
   email: string
   password: string
   color: string
@@ -22,40 +23,20 @@ interface DemoAccount {
 }
 
 const DEMO_ACCOUNTS: DemoAccount[] = [
-  {
-    role: 'school_admin',
-    email: 'admin@demo.smartlearnlms.co.zw',
-    password: 'demo1234',
-    color: 'bg-blue-100 text-blue-700 ring-blue-200',
-    initials: 'SA',
-  },
-  {
-    role: 'teacher',
-    email: 'teacher@demo.smartlearnlms.co.zw',
-    password: 'demo1234',
-    color: 'bg-violet-100 text-violet-700 ring-violet-200',
-    initials: 'TC',
-  },
-  {
-    role: 'student',
-    email: 'student@demo.smartlearnlms.co.zw',
-    password: 'demo1234',
-    color: 'bg-emerald-100 text-emerald-700 ring-emerald-200',
-    initials: 'ST',
-  },
-  {
-    role: 'parent',
-    email: 'parent@demo.smartlearnlms.co.zw',
-    password: 'demo1234',
-    color: 'bg-amber-100 text-amber-700 ring-amber-200',
-    initials: 'PA',
-  },
+  { role: 'school_admin', label: 'Headmaster',      email: 'headmaster@demo.smartlearnlms.co.zw',   password: 'demo1234', color: 'bg-blue-100 text-blue-700 ring-blue-200',     initials: 'HM' },
+  { role: 'school_admin', label: 'Deputy Head',     email: 'deputy@demo.smartlearnlms.co.zw',        password: 'demo1234', color: 'bg-indigo-100 text-indigo-700 ring-indigo-200', initials: 'DH' },
+  { role: 'teacher',      label: 'Head of Dept.',   email: 'hod@demo.smartlearnlms.co.zw',           password: 'demo1234', color: 'bg-violet-100 text-violet-700 ring-violet-200', initials: 'HD' },
+  { role: 'teacher',      label: 'Form Teacher',    email: 'teacher@demo.smartlearnlms.co.zw',       password: 'demo1234', color: 'bg-purple-100 text-purple-700 ring-purple-200', initials: 'TC' },
+  { role: 'finance',      label: 'Bursar',          email: 'bursar@demo.smartlearnlms.co.zw',        password: 'demo1234', color: 'bg-amber-100 text-amber-700 ring-amber-200',   initials: 'BS' },
+  { role: 'admin_staff',  label: 'Receptionist',    email: 'receptionist@demo.smartlearnlms.co.zw',  password: 'demo1234', color: 'bg-teal-100 text-teal-700 ring-teal-200',      initials: 'RC' },
+  { role: 'student',      label: 'Head Boy',        email: 'student@demo.smartlearnlms.co.zw',       password: 'demo1234', color: 'bg-emerald-100 text-emerald-700 ring-emerald-200', initials: 'HB' },
+  { role: 'parent',       label: 'Parent',          email: 'parent@demo.smartlearnlms.co.zw',        password: 'demo1234', color: 'bg-pink-100 text-pink-700 ring-pink-200',      initials: 'PA' },
 ]
 
 export default function LoginPage() {
   const navigate = useNavigate()
   const [serverError, setServerError] = useState<string | null>(null)
-  const [activeDemo, setActiveDemo] = useState<UserRole | null>(null)
+  const [activeDemo, setActiveDemo] = useState<string | null>(null)
 
   const {
     register,
@@ -67,7 +48,7 @@ export default function LoginPage() {
   function fillDemo(account: DemoAccount) {
     setValue('email', account.email, { shouldValidate: true })
     setValue('password', account.password, { shouldValidate: true })
-    setActiveDemo(account.role)
+    setActiveDemo(account.email)
     setServerError(null)
   }
 
@@ -100,15 +81,15 @@ export default function LoginPage() {
           <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">
             Try a demo account
           </p>
-          <div className="grid grid-cols-2 gap-2">
-            {DEMO_ACCOUNTS.map((account) => (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {DEMO_ACCOUNTS.map((account, i) => (
               <button
-                key={account.role}
+                key={i}
                 type="button"
                 onClick={() => fillDemo(account)}
                 className={cn(
-                  'flex items-center gap-2.5 px-3 py-2.5 rounded-xl border-2 text-left transition-all',
-                  activeDemo === account.role
+                  'flex items-center gap-2 px-2.5 py-2 rounded-xl border-2 text-left transition-all',
+                  activeDemo === account.email
                     ? 'border-primary-500 bg-white shadow-sm'
                     : 'border-transparent bg-white hover:border-slate-200 hover:shadow-sm',
                 )}
@@ -118,9 +99,9 @@ export default function LoginPage() {
                 </div>
                 <div className="min-w-0">
                   <p className="text-xs font-semibold text-slate-700 truncate">
-                    {ROLE_LABELS[account.role]}
+                    {account.label ?? ROLE_LABELS[account.role]}
                   </p>
-                  <p className="text-xs text-slate-400">click to fill</p>
+                  <p className="text-[10px] text-slate-400">click to fill</p>
                 </div>
               </button>
             ))}
